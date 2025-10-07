@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ryan K. Murage | Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #ffffff;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: flex-end;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #6366f1;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 5%;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero .tagline {
+            font-size: 1.5rem;
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: #6366f1;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+            background: #4f46e5;
+        }
+
+        .cta-button.secondary {
+            background: white;
+            color: #6366f1;
+            border: 2px solid #6366f1;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.1);
+        }
+
+        .cta-button.secondary:hover {
+            background: #f0f0ff;
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 5%;
+            background: #f9fafb;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #1a1a1a;
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .education-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .education-box h3 {
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .education-box .degree {
+            color: #6366f1;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-box ul {
+            margin-top: 1rem;
+            margin-left: 1.5rem;
+        }
+
+        .education-box li {
+            margin-bottom: 0.5rem;
+            color: #666;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 5rem 5%;
+            background: white;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+
+        .project-card ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .project-card li {
+            color: #666;
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .project-card li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #6366f1;
+            font-weight: bold;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background: #f3f4f6;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #4b5563;
+        }
+
+        .github-link {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.6rem 1.5rem;
+            background: #24292e;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .github-link:hover {
+            background: #1a1e22;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Experience Section */
+        .experience {
+            padding: 5rem 5%;
+            background: #f9fafb;
+        }
+
+        .experience-item {
+            max-width: 900px;
+            margin: 0 auto 2rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .experience-header h3 {
+            color: #1a1a1a;
+            font-size: 1.5rem;
+        }
+
+        .experience-header .company {
+            color: #6366f1;
+            font-weight: 600;
+        }
+
+        .experience-header .date {
+            color: #666;
+            font-style: italic;
+        }
+
+        .experience-item ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .experience-item li {
+            color: #666;
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .experience-item li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #6366f1;
+            font-weight: bold;
+            font-size: 1.5rem;
+            line-height: 1.2;
+        }
+
+        /* Skills Section */
+        .skills {
+            padding: 5rem 5%;
+            background: white;
+        }
+
+        .skills-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: #f9fafb;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .skill-category h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+
+        .skill-category ul {
+            list-style: none;
+        }
+
+        .skill-category li {
+            padding: 0.5rem 0;
+            color: #666;
+        }
+
+        .skill-category li:before {
+            content: "▹ ";
+            color: #6366f1;
+            font-weight: bold;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 5%;
+            background: #f9fafb;
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .social-links a:hover {
+            color: #6366f1;
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem 5%;
+            text-align: center;
+            background: white;
+            color: #666;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.2rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .experience-header {
+                flex-direction: column;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Ryan K. Murage</h1>
+            <p class="tagline">
+                Informatics & Computer Science Student | Data Analyst | Software Developer<br>
+                Passionate about leveraging data and technology to drive insights and build innovative solutions.
+            </p>
+            <div class="hero-buttons">
+                <a href="#contact" class="cta-button">Get In Touch</a>
+                <a href="#projects" class="cta-button secondary">View My Work</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <p>
+                I'm a junior at the University of Massachusetts Amherst pursuing a B.S. in Informatics with a Minor in Computer Science. 
+                I'm eager to apply my data analysis, SQL, and programming skills in data-focused or software development internships.
+            </p>
+            <br>
+            <p>
+                Proficient in Python, Java, and data visualization tools, I have hands-on experience from coursework and projects. 
+                I'm passionate about problem-solving, teamwork, and leveraging data to drive insights and decision-making. 
+                I'm excited to bring fresh perspectives to any company that values innovation and continuous learning.
+            </p>
+
+            <div class="education-box">
+                <h3>University of Massachusetts Amherst</h3>
+                <p class="degree">Bachelor of Science in Informatics | Minor in Computer Science</p>
+                <p style="color: #666;">Expected Graduation: May 2027 | GPA: 3.18/4.00</p>
+                <ul>
+                    <li><strong>Concentrations:</strong> Data Science and Software Development</li>
+                    <li><strong>Related Coursework:</strong> Data Structures & Algorithms, Foundations of Programming, Object-Oriented Programming, C Programming Language, Intro to Data Science</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <h2 class="section-title">Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3>Automated Test Suite for API Integration</h3>
+                <ul>
+                    <li>Developed a comprehensive API testing framework using pytest and unittest.mock, implementing mocking strategies to simulate dependencies and enable isolated integration testing across multiple services</li>
+                    <li>Engineered an SQLite-based logging system to track API performance metrics, generating automated statistical reports on response times, status code distributions, and reliability trends for continuous monitoring</li>
+                    <li>Created 30+ parameterized test cases covering CRUD operations, error handling, concurrent requests, and edge cases, achieving 100% test pass rate with performance benchmarking under 3-second thresholds</li>
+                </ul>
+                <div class="project-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">pytest</span>
+                    <span class="tag">API Testing</span>
+                    <span class="tag">Integration Testing</span>
+                </div>
+                <a href="https://github.com/rmurage05/API-Test-Suite" target="_blank" class="github-link">View on GitHub →</a>
+            </div>
+
+            <div class="project-card">
+                <h3>Algorithm Performance Analyzer</h3>
+                <ul>
+                    <li>Developed a benchmarking tool to analyze and compare the efficiency of various sorting, searching, and graph algorithms</li>
+                    <li>Implements multiple algorithms, including Quicksort, Merge Sort, and Dijkstra's Algorithm, while measuring time complexity and generating detailed performance reports</li>
+                    <li>Visualizes algorithm efficiency using JavaFX for clear insights</li>
+                </ul>
+                <div class="project-tags">
+                    <span class="tag">Java</span>
+                    <span class="tag">JavaFX</span>
+                    <span class="tag">Algorithms</span>
+                    <span class="tag">Data Structures</span>
+                </div>
+                <a href="https://github.com/rmurage05/Algorithm-Performance-Analyzer" target="_blank" class="github-link">View on GitHub →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <h2 class="section-title">Experience</h2>
+        
+        <div class="experience-item">
+            <div class="experience-header">
+                <div>
+                    <h3>Front of Store Attendant</h3>
+                    <p class="company">Target | Lowell, Massachusetts</p>
+                </div>
+                <p class="date">Dec 2021 – Aug 2024</p>
+            </div>
+            <ul>
+                <li>Ensured a clean and organized store environment by retrieving carts and maintaining cashier and self-checkout lanes</li>
+                <li>Provided excellent customer service as a cashier and returns receptionist, assisting with a wide range of inquiries and transactions</li>
+                <li>Worked collaboratively with team members to optimize efficiency in tasks such as fulfilling Drive-Up orders and restocking shelves</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div>
+                    <h3>Community Service Lead</h3>
+                    <p class="company">Black Student Union | UMass Amherst</p>
+                </div>
+                <p class="date">Aug 2023 – Present</p>
+            </div>
+            <ul>
+                <li>Participated in the involvement of the curation of events, as well as meetings concerning the betterment of black student body within the campus</li>
+                <li>Played a key role in a diverse team advocating for community development and inclusion</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-container">
+            <div class="skill-category">
+                <h3>Programming Languages</h3>
+                <ul>
+                    <li>Java</li>
+                    <li>Python</li>
+                    <li>JavaScript</li>
+                    <li>TypeScript</li>
+                    <li>C</li>
+                    <li>SQL</li>
+                    <li>R</li>
+                </ul>
+            </div>
+
+            <div class="skill-category">
+                <h3>Tools & Technologies</h3>
+                <ul>
+                    <li>Visual Studio Code</li>
+                    <li>Excel</li>
+                    <li>PyCharm</li>
+                    <li>Jupyter Notebooks</li>
+                    <li>Git</li>
+                    <li>Linux Terminal</li>
+                    <li>RStudio</li>
+                </ul>
+            </div>
+
+            <div class="skill-category">
+                <h3>Core Competencies</h3>
+                <ul>
+                    <li>Data Analysis</li>
+                    <li>Algorithm Design</li>
+                    <li>API Testing</li>
+                    <li>Problem Solving</li>
+                    <li>Team Collaboration</li>
+                    <li>Software Development</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-content">
+            <p>
+                I'm currently seeking internship opportunities in data analysis and software development. 
+                Let's connect and explore how I can contribute to your team!
+            </p>
+            <a href="mailto:ryank.murage@gmail.com" class="cta-button">Send me an email</a>
+            
+            <div class="social-links">
+                <a href="https://github.com/rmurage05" target="_blank">
+                    <span>📁</span> GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/ryan-murage" target="_blank">
+                    <span>💼</span> LinkedIn
+                </a>
+                <a href="tel:781-309-8951">
+                    <span>📱</span> (781) 309-8951
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Ryan K. Murage. Built with passion for technology and innovation.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add active state to navigation on scroll
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('nav a').forEach(link => {
+                link.style.color = '#333';
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.style.color = '#6366f1';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
