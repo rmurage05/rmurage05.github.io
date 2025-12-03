@@ -4,218 +4,547 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ryan K. Murage | Portfolio</title>
+
+    <!-- Mixed typography: display + body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
     <style>
+        :root {
+            --navy-900: #020617;
+            --navy-800: #02091a;
+            --navy-700: #0b1220;
+            --navy-600: #111827;
+            --navy-500: #1e293b;
+            --gray-50:  #f9fafb;
+            --gray-100: #e5e7eb;
+            --gray-300: #9ca3af;
+            --gray-500: #6b7280;
+            --accent:   #38bdf8;
+            --accent-soft: #7dd3fc;
+            --radius-lg: 18px;
+            --radius-pill: 999px;
+            --shadow-soft: 0 20px 45px rgba(15,23,42,0.65);
+            --shadow-subtle: 0 12px 30px rgba(15,23,42,0.45);
+            --transition-fast: 160ms ease-out;
+            --transition-med: 220ms ease;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html, body {
+            scroll-behavior: smooth;
+            background:
+                radial-gradient(circle at top left, #1f2937 0, #020617 55%);
+            color: var(--gray-50);
+            font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: geometricPrecision;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #ffffff;
+            line-height: 1.7;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Overall layout */
+
+        .page-shell {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 1.5rem 3rem;
+        }
+
+        section {
+            scroll-margin-top: 80px;
         }
 
         /* Navigation */
+
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1.5rem 5%;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(16px);
+            background: linear-gradient(
+                90deg,
+                rgba(15,23,42,0.95),
+                rgba(15,23,42,0.9)
+            );
+            border-bottom: 1px solid rgba(148,163,184,0.4);
+        }
+
+        .nav-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0.9rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .nav-mark {
+            width: 34px;
+            height: 34px;
+            border-radius: 30% 70% 70% 30%;
+            background: conic-gradient(from 210deg, var(--accent) 0, var(--accent-soft) 35%, var(--navy-500) 75%, var(--navy-900) 100%);
+            box-shadow: 0 0 0 1px rgba(15,23,42,0.7);
+        }
+
+        .nav-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.05rem;
+        }
+
+        .nav-text span:first-child {
+            font-family: "Space Grotesk", system-ui, sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+        }
+
+        .nav-text span:last-child {
+            font-size: 0.8rem;
+            color: var(--gray-300);
         }
 
         nav ul {
-            list-style: none;
             display: flex;
             justify-content: flex-end;
-            gap: 2rem;
+            gap: 1.6rem;
+            font-size: 0.88rem;
+            color: var(--gray-100);
         }
 
         nav a {
-            text-decoration: none;
-            color: #333;
             font-weight: 500;
-            transition: color 0.3s ease;
+            position: relative;
+            padding-bottom: 0.1rem;
+            transition: color var(--transition-fast);
         }
 
-        nav a:hover {
-            color: #6366f1;
+        nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-soft));
+            transition: width var(--transition-fast);
+        }
+
+        nav a:hover::after,
+        nav a:focus-visible::after {
+            width: 100%;
         }
 
         /* Hero Section */
+
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding: 2rem 5%;
-            text-align: center;
+            padding: 7rem 0 4rem;
         }
 
-        .hero-content {
-            max-width: 900px;
+        .hero-inner {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            width: 100%;
+        }
+
+        .hero-top {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hero-intro {
+            max-width: 640px;
+        }
+
+        .hero-tagline-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.9rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid rgba(148,163,184,0.45);
+            background: radial-gradient(circle at left, rgba(56,189,248,0.2), rgba(15,23,42,0.95));
+            font-size: 0.8rem;
+            color: var(--gray-100);
+            margin-bottom: 1.1rem;
+        }
+
+        .hero-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            background: radial-gradient(circle, var(--accent), var(--accent-soft));
+            box-shadow: 0 0 0 4px rgba(56,189,248,0.25);
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            color: #1a1a1a;
-            animation: fadeInUp 0.8s ease;
+            font-family: "Space Grotesk", system-ui, sans-serif;
+            font-size: clamp(2.5rem, 4vw, 3.3rem);
+            margin-bottom: 0.6rem;
+            color: #f9fafb;
+            letter-spacing: -0.03em;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(120deg, var(--accent), var(--accent-soft));
+            -webkit-background-clip: text;
+            color: transparent;
         }
 
         .hero .tagline {
-            font-size: 1.5rem;
-            color: #666;
-            margin-bottom: 2rem;
+            font-size: 1rem;
+            color: var(--gray-100);
+            margin-bottom: 1.6rem;
             line-height: 1.8;
-            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.9rem 1.7rem;
+            font-size: 0.86rem;
+            color: var(--gray-300);
+            margin-bottom: 1.8rem;
+        }
+
+        .hero-meta strong {
+            color: var(--gray-50);
         }
 
         .hero-buttons {
             display: flex;
-            gap: 1rem;
-            justify-content: center;
+            gap: 0.9rem;
             flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease 0.4s both;
         }
 
         .cta-button {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background: #6366f1;
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.9rem;
+            border-radius: var(--radius-pill);
             font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-soft);
+            background: linear-gradient(135deg, var(--accent), var(--accent-soft));
+            color: #020617;
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
         }
 
         .cta-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
-            background: #4f46e5;
+            box-shadow: 0 22px 50px rgba(15,23,42,0.85);
         }
 
         .cta-button.secondary {
-            background: white;
-            color: #6366f1;
-            border: 2px solid #6366f1;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.1);
+            background: rgba(15,23,42,0.6);
+            color: var(--gray-50);
+            border: 1px solid rgba(148,163,184,0.65);
+            box-shadow: var(--shadow-subtle);
         }
 
         .cta-button.secondary:hover {
-            background: #f0f0ff;
+            background: rgba(15,23,42,0.95);
         }
 
-        /* About Section */
-        .about {
-            padding: 5rem 5%;
-            background: #f9fafb;
+        .hero-card {
+            min-width: 260px;
+            flex: 1 1 260px;
+            max-width: 360px;
+            border-radius: 22px;
+            padding: 1.4rem 1.3rem;
+            background: radial-gradient(circle at top, #1e293b 0, #020617 60%);
+            border: 1px solid rgba(148,163,184,0.5);
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
         }
+
+        .hero-card::before {
+            content: "";
+            position: absolute;
+            inset: -45%;
+            background:
+                radial-gradient(circle at top left, rgba(56,189,248,0.18), transparent 55%),
+                radial-gradient(circle at bottom right, rgba(56,189,248,0.15), transparent 55%);
+            opacity: 0.9;
+            mix-blend-mode: screen;
+        }
+
+        .hero-card-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-chip-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.75rem;
+            color: var(--gray-100);
+        }
+
+        .hero-chip {
+            padding: 0.25rem 0.8rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid rgba(148,163,184,0.7);
+            backdrop-filter: blur(10px);
+            background: rgba(15,23,42,0.8);
+        }
+
+        .hero-chip-muted {
+            color: var(--gray-300);
+        }
+
+        .hero-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0,1fr));
+            gap: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-stat {
+            padding: 0.75rem 0.8rem;
+            border-radius: 16px;
+            border: 1px solid rgba(148,163,184,0.55);
+            background: rgba(15,23,42,0.8);
+            font-size: 0.78rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+        }
+
+        .hero-stat strong {
+            font-family: "Space Grotesk", system-ui, sans-serif;
+            font-size: 1.05rem;
+        }
+
+        .hero-stat span {
+            color: var(--gray-300);
+        }
+
+        .hero-profile {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.8rem;
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .hero-profile-main {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .hero-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--navy-500), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: "Space Grotesk", system-ui, sans-serif;
+            font-weight: 600;
+            color: #020617;
+        }
+
+        .hero-profile-text strong {
+            font-size: 0.86rem;
+        }
+
+        .hero-profile-text span {
+            font-size: 0.76rem;
+            color: var(--gray-300);
+        }
+
+        .hero-profile-pill {
+            padding: 0.25rem 0.8rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid rgba(148,163,184,0.65);
+            background: rgba(15,23,42,0.95);
+        }
+
+        /* Sections */
 
         .section-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            color: #1a1a1a;
+            font-family: "Space Grotesk", system-ui, sans-serif;
+            font-size: 2rem;
+            text-align: left;
+            margin-bottom: 1rem;
+            color: var(--gray-50);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
         }
+
+        .section-intro {
+            font-size: 0.95rem;
+            color: var(--gray-300);
+            max-width: 640px;
+            margin-bottom: 2.5rem;
+        }
+
+        .about,
+        .projects,
+        .experience,
+        .skills,
+        .contact {
+            padding: 4.5rem 0;
+        }
+
+        .about {
+            border-top: 1px solid rgba(148,163,184,0.35);
+        }
+
+        /* About */
 
         .about-content {
             max-width: 900px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-            color: #555;
-            line-height: 1.8;
+            font-size: 1rem;
+            color: var(--gray-100);
+            line-height: 1.9;
+        }
+
+        .about-content p + p {
+            margin-top: 1rem;
         }
 
         .education-box {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
+            background: rgba(15,23,42,0.9);
+            padding: 1.7rem 1.8rem;
+            border-radius: var(--radius-lg);
             margin-top: 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(148,163,184,0.5);
+            box-shadow: var(--shadow-subtle);
         }
 
         .education-box h3 {
-            color: #1a1a1a;
-            margin-bottom: 0.5rem;
-            font-size: 1.5rem;
+            color: var(--gray-50);
+            margin-bottom: 0.4rem;
+            font-size: 1.25rem;
+            font-family: "Space Grotesk", system-ui, sans-serif;
         }
 
         .education-box .degree {
-            color: #6366f1;
+            color: var(--accent-soft);
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
+            font-size: 0.98rem;
+        }
+
+        .education-box p {
+            color: var(--gray-300);
+            font-size: 0.9rem;
         }
 
         .education-box ul {
             margin-top: 1rem;
-            margin-left: 1.5rem;
+            padding-left: 1.1rem;
         }
 
         .education-box li {
-            margin-bottom: 0.5rem;
-            color: #666;
+            margin-bottom: 0.4rem;
+            color: var(--gray-100);
+            font-size: 0.9rem;
+            position: relative;
         }
 
-        /* Projects Section */
-        .projects {
-            padding: 5rem 5%;
-            background: white;
+        .education-box li::before {
+            content: "▹";
+            position: absolute;
+            left: -1.1rem;
+            color: var(--accent);
         }
+
+        /* Projects */
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.8rem;
         }
 
         .project-card {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            border: 1px solid #e5e7eb;
+            background: radial-gradient(circle at top left, rgba(56,189,248,0.12), rgba(15,23,42,1));
+            border-radius: var(--radius-lg);
+            padding: 1.7rem 1.8rem;
+            box-shadow: var(--shadow-subtle);
+            border: 1px solid rgba(148,163,184,0.55);
+            transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med), background var(--transition-med);
         }
 
         .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-soft);
+            border-color: var(--accent);
+            background: radial-gradient(circle at top left, rgba(56,189,248,0.18), rgba(15,23,42,1));
         }
 
         .project-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #1a1a1a;
+            font-size: 1.3rem;
+            margin-bottom: 0.7rem;
+            color: var(--gray-50);
+            font-family: "Space Grotesk", system-ui, sans-serif;
         }
 
         .project-card ul {
-            list-style: none;
-            margin-top: 1rem;
+            margin-top: 0.6rem;
         }
 
         .project-card li {
-            color: #666;
-            margin-bottom: 0.5rem;
-            padding-left: 1.5rem;
+            color: var(--gray-100);
+            margin-bottom: 0.45rem;
+            padding-left: 1.1rem;
             position: relative;
+            font-size: 0.9rem;
         }
 
         .project-card li:before {
             content: "→";
             position: absolute;
             left: 0;
-            color: #6366f1;
+            color: var(--accent);
             font-weight: bold;
         }
 
@@ -223,49 +552,48 @@
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin-top: 1rem;
+            margin-top: 0.8rem;
         }
 
         .tag {
-            background: #f3f4f6;
+            background: rgba(15,23,42,0.85);
             padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: #4b5563;
+            border-radius: var(--radius-pill);
+            font-size: 0.78rem;
+            color: var(--gray-100);
+            border: 1px solid rgba(148,163,184,0.6);
         }
 
         .github-link {
-            display: inline-block;
-            margin-top: 1.5rem;
-            padding: 0.6rem 1.5rem;
-            background: #24292e;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            margin-top: 1rem;
+            padding: 0.55rem 1.4rem;
+            background: #020617;
+            color: var(--gray-50);
+            border-radius: 999px;
             font-weight: 500;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
+            font-size: 0.88rem;
+            transition: all var(--transition-fast);
+            border: 1px solid rgba(148,163,184,0.65);
         }
 
         .github-link:hover {
-            background: #1a1e22;
+            background: var(--navy-900);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow-subtle);
         }
 
-        /* Experience Section */
-        .experience {
-            padding: 5rem 5%;
-            background: #f9fafb;
-        }
+        /* Experience */
 
         .experience-item {
             max-width: 900px;
-            margin: 0 auto 2rem;
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin: 0 auto 1.8rem;
+            background: rgba(15,23,42,0.96);
+            padding: 1.8rem 1.9rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-subtle);
+            border: 1px solid rgba(148,163,184,0.55);
         }
 
         .experience-header {
@@ -273,71 +601,73 @@
             justify-content: space-between;
             align-items: flex-start;
             flex-wrap: wrap;
-            margin-bottom: 1rem;
+            gap: 0.6rem;
+            margin-bottom: 0.9rem;
         }
 
         .experience-header h3 {
-            color: #1a1a1a;
-            font-size: 1.5rem;
+            color: var(--gray-50);
+            font-size: 1.2rem;
+            font-family: "Space Grotesk", system-ui, sans-serif;
         }
 
         .experience-header .company {
-            color: #6366f1;
+            color: var(--accent-soft);
             font-weight: 600;
+            font-size: 0.9rem;
         }
 
         .experience-header .date {
-            color: #666;
+            color: var(--gray-300);
             font-style: italic;
+            font-size: 0.86rem;
         }
 
         .experience-item ul {
-            list-style: none;
-            margin-top: 1rem;
+            margin-top: 0.7rem;
         }
 
         .experience-item li {
-            color: #666;
-            margin-bottom: 0.5rem;
-            padding-left: 1.5rem;
+            color: var(--gray-100);
+            margin-bottom: 0.45rem;
+            padding-left: 1.1rem;
             position: relative;
+            font-size: 0.9rem;
         }
 
         .experience-item li:before {
             content: "•";
             position: absolute;
             left: 0;
-            color: #6366f1;
+            color: var(--accent);
             font-weight: bold;
-            font-size: 1.5rem;
+            font-size: 1.1rem;
             line-height: 1.2;
         }
 
-        /* Skills Section */
-        .skills {
-            padding: 5rem 5%;
-            background: white;
-        }
+        /* Skills */
 
         .skills-container {
             max-width: 900px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            gap: 1.8rem;
         }
 
         .skill-category {
-            background: #f9fafb;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            background: rgba(15,23,42,0.96);
+            padding: 1.6rem 1.7rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-subtle);
+            border: 1px solid rgba(148,163,184,0.6);
         }
 
         .skill-category h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: #1a1a1a;
+            font-size: 1.1rem;
+            margin-bottom: 0.7rem;
+            color: var(--gray-50);
+            font-family: "Space Grotesk", system-ui, sans-serif;
         }
 
         .skill-category ul {
@@ -345,65 +675,70 @@
         }
 
         .skill-category li {
-            padding: 0.5rem 0;
-            color: #666;
+            padding: 0.35rem 0;
+            color: var(--gray-100);
+            font-size: 0.9rem;
         }
 
         .skill-category li:before {
             content: "▹ ";
-            color: #6366f1;
+            color: var(--accent);
             font-weight: bold;
         }
 
-        /* Contact Section */
+        /* Contact */
+
         .contact {
-            padding: 5rem 5%;
-            background: #f9fafb;
-            text-align: center;
+            text-align: left;
         }
 
         .contact-content {
-            max-width: 600px;
-            margin: 0 auto;
+            max-width: 620px;
         }
 
         .contact p {
-            font-size: 1.2rem;
-            color: #666;
-            margin-bottom: 2rem;
+            font-size: 1rem;
+            color: var(--gray-100);
+            margin-bottom: 1.6rem;
         }
 
         .social-links {
             display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
+            gap: 1.5rem;
+            margin-top: 1.8rem;
             flex-wrap: wrap;
+            font-size: 0.9rem;
         }
 
         .social-links a {
-            color: #333;
+            color: var(--gray-100);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s ease;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            padding: 0.4rem 0;
+            border-bottom: 1px solid transparent;
+            transition: border-color var(--transition-fast), color var(--transition-fast);
         }
 
         .social-links a:hover {
-            color: #6366f1;
+            color: var(--accent-soft);
+            border-color: var(--accent-soft);
         }
 
         /* Footer */
+
         footer {
-            padding: 2rem 5%;
+            padding: 1.8rem 0 0.8rem;
             text-align: center;
-            background: white;
-            color: #666;
+            color: var(--gray-300);
+            border-top: 1px solid rgba(148,163,184,0.35);
+            margin-top: 3rem;
         }
 
-        /* Animations */
+        /* Animations (kept from original) */
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -416,271 +751,357 @@
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
 
-            .hero .tagline {
-                font-size: 1.2rem;
+        @media (max-width: 900px) {
+            .hero-top {
+                flex-direction: column;
+            }
+            .hero-card {
+                align-self: stretch;
+                max-width: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-inner {
+                padding-inline: 1rem;
             }
 
             nav ul {
                 gap: 1rem;
-                font-size: 0.9rem;
+                font-size: 0.85rem;
+            }
+
+            .hero {
+                padding-top: 6rem;
             }
 
             .section-title {
-                font-size: 2rem;
+                font-size: 1.7rem;
             }
+        }
 
-            .experience-header {
-                flex-direction: column;
+        @media (max-width: 640px) {
+            nav ul {
+                display: none;
             }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
+            .section-title {
+                text-align: left;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+        <div class="nav-inner">
+            <div class="nav-brand">
+                <div class="nav-mark" aria-hidden="true"></div>
+                <div class="nav-text">
+                    <span>RYAN K. MURAGE</span>
+                    <span>Informatics · Data · Software</span>
+                </div>
+            </div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Ryan K. Murage</h1>
-            <p class="tagline">
-                Informatics & Computer Science Student | Data Analyst | Software Developer<br>
-                Passionate about leveraging data and technology to drive insights and build innovative solutions.
+    <div class="page-shell">
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-inner">
+                <div class="hero-top">
+                    <div class="hero-intro">
+                        <div class="hero-tagline-pill">
+                            <span class="hero-dot"></span>
+                            <span>Informatics & Computer Science · Data & Software</span>
+                        </div>
+                        <h1>Ryan K. Murage<br><span>Building data-informed software</span></h1>
+                        <p class="tagline">
+                            Informatics & Computer Science Student | Data Analyst | Software Developer.<br>
+                            Passionate about using data and thoughtful engineering to uncover insights and ship useful tools.
+                        </p>
+                        <div class="hero-meta">
+                            <span><strong>Currently:</strong> Junior at UMass Amherst (B.S. Informatics, Minor in Business)</span>
+                            <span><strong>Actively seeking:</strong> Data-focused & software development internships</span>
+                        </div>
+                        <div class="hero-buttons">
+                            <a href="#contact" class="cta-button">Get In Touch</a>
+                            <a href="#projects" class="cta-button secondary">View My Work</a>
+                        </div>
+                    </div>
+
+                    <aside class="hero-card" aria-label="Quick profile snapshot">
+                        <div class="hero-card-inner">
+                            <div class="hero-chip-row">
+                                <span class="hero-chip">Student · Data Analyst · Developer</span>
+                                <span class="hero-chip-muted">Based in Massachusetts</span>
+                            </div>
+                            <div class="hero-stat-grid">
+                                <div class="hero-stat">
+                                    <strong>2027</strong>
+                                    <span>Expected graduation · B.S. Informatics, Minor in CS</span>
+                                </div>
+                                <div class="hero-stat">
+                                    <strong>3.18</strong>
+                                    <span>GPA on a 4.00 scale at UMass Amherst</span>
+                                </div>
+                                <div class="hero-stat">
+                                    <strong>3+ yrs</strong>
+                                    <span>Programming & data experience across coursework & projects</span>
+                                </div>
+                                <div class="hero-stat">
+                                    <strong>Focus</strong>
+                                    <span>Data analysis, testing, and reliable software</span>
+                                </div>
+                            </div>
+                            <div class="hero-profile">
+                                <div class="hero-profile-main">
+                                    <div class="hero-avatar" aria-hidden="true">RM</div>
+                                    <div class="hero-profile-text">
+                                        <strong>Ryan K. Murage</strong>
+                                        <span>UMass Amherst · Informatics & Computer Science</span>
+                                    </div>
+                                </div>
+                                <span class="hero-profile-pill">Open to 2026 internships</span>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <h2 class="section-title">About Me</h2>
+            <p class="section-intro">
+                Blending informatics, computer science, and real-world experience to analyze data, build tools,
+                and collaborate across teams.
             </p>
-            <div class="hero-buttons">
-                <a href="#contact" class="cta-button">Get In Touch</a>
-                <a href="#projects" class="cta-button secondary">View My Work</a>
-            </div>
-        </div>
-    </section>
+            <div class="about-content">
+                <p>
+                    I'm a junior at the University of Massachusetts Amherst pursuing a B.S. in Informatics with a Minor in Computer Science. 
+                    I'm eager to apply my data analysis, SQL, and programming skills in data-focused or software development internships.
+                </p>
+                <p>
+                    Proficient in Python, Java, and data visualization tools, I have hands-on experience from coursework and projects. 
+                    I'm passionate about problem-solving, teamwork, and leveraging data to drive insights and decision-making. 
+                    I'm excited to bring fresh perspectives to any company that values innovation and continuous learning.
+                </p>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <h2 class="section-title">About Me</h2>
-        <div class="about-content">
-            <p>
-                I'm a junior at the University of Massachusetts Amherst pursuing a B.S. in Informatics with a Minor in Computer Science. 
-                I'm eager to apply my data analysis, SQL, and programming skills in data-focused or software development internships.
+                <div class="education-box">
+                    <h3>University of Massachusetts Amherst</h3>
+                    <p class="degree">Bachelor of Science in Informatics | Minor in Computer Science</p>
+                    <p>Expected Graduation: May 2027 | GPA: 3.18/4.00</p>
+                    <ul>
+                        <li><strong>Concentrations:</strong> Data Science and Software Development</li>
+                        <li><strong>Related Coursework:</strong> Data Structures & Algorithms, Foundations of Programming, Object-Oriented Programming, C Programming Language, Intro to Data Science</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects">
+            <h2 class="section-title">Projects</h2>
+            <p class="section-intro">
+                A selection of work that highlights how I use Python, Java, R, and testing practices
+                to explore data and build reliable systems.
             </p>
-            <br>
-            <p>
-                Proficient in Python, Java, and data visualization tools, I have hands-on experience from coursework and projects. 
-                I'm passionate about problem-solving, teamwork, and leveraging data to drive insights and decision-making. 
-                I'm excited to bring fresh perspectives to any company that values innovation and continuous learning.
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Automated Test Suite for API Integration</h3>
+                    <ul>
+                        <li>Developed a comprehensive API testing framework using pytest and unittest.mock, implementing mocking strategies to simulate dependencies and enable isolated integration testing across multiple services</li>
+                        <li>Engineered an SQLite-based logging system to track API performance metrics, generating automated statistical reports on response times, status code distributions, and reliability trends for continuous monitoring</li>
+                        <li>Created 30+ parameterized test cases covering CRUD operations, error handling, concurrent requests, and edge cases, achieving 100% test pass rate with performance benchmarking under 3-second thresholds</li>
+                    </ul>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">pytest</span>
+                        <span class="tag">API Testing</span>
+                        <span class="tag">Integration Testing</span>
+                    </div>
+                    <a href="https://github.com/rmurage05/API-Test-Suite" target="_blank" class="github-link">View on GitHub →</a>
+                </div>
+
+                <div class="project-card">
+                    <h3>Algorithm Performance Analyzer</h3>
+                    <ul>
+                        <li>Developed a benchmarking tool to analyze and compare the efficiency of various sorting, searching, and graph algorithms</li>
+                        <li>Implements multiple algorithms, including Quicksort, Merge Sort, and Dijkstra's Algorithm, while measuring time complexity and generating detailed performance reports</li>
+                        <li>Visualizes algorithm efficiency using JavaFX for clear insights</li>
+                    </ul>
+                    <div class="project-tags">
+                        <span class="tag">Java</span>
+                        <span class="tag">JavaFX</span>
+                        <span class="tag">Algorithms</span>
+                        <span class="tag">Data Structures</span>
+                    </div>
+                    <a href="https://github.com/rmurage05/Algorithm-Performance-Analyzer" target="_blank" class="github-link">View on GitHub →</a>
+                </div>
+
+                <div class="project-card">
+                    <h3>Linear Regression Analysis in R</h3>
+                    <ul>
+                        <li>Conducted statistical analysis on 3,314 used vehicle records using linear regression modeling in R to identify key predictors of selling price</li>
+                        <li>Performed exploratory data analysis (EDA) with data cleaning, variable transformation, and visualization using ggplot2, dplyr, and tidyverse packages</li>
+                        <li>Evaluated model performance through 10-fold cross-validation, achieving lower RMSE with comprehensive feature selection approach</li>
+                    </ul>
+                    <div class="project-tags">
+                        <span class="tag">R</span>
+                        <span class="tag">Statistical Analysis</span>
+                        <span class="tag">Linear Regression</span>
+                        <span class="tag">Data Visualization</span>
+                        <span class="tag">Machine Learning</span>
+                    </div>
+                    <a href="https://github.com/rmurage05/Linear-Regression-Analysis" target="_blank" class="github-link">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="experience">
+            <h2 class="section-title">Experience</h2>
+            <p class="section-intro">
+                Roles that taught me how to communicate clearly, support customers, and contribute to a team—
+                skills I carry into every technical project.
             </p>
-
-            <div class="education-box">
-                <h3>University of Massachusetts Amherst</h3>
-                <p class="degree">Bachelor of Science in Informatics | Minor in Computer Science</p>
-                <p style="color: #666;">Expected Graduation: May 2027 | GPA: 3.18/4.00</p>
-                <ul>
-                    <li><strong>Concentrations:</strong> Data Science and Software Development</li>
-                    <li><strong>Related Coursework:</strong> Data Structures & Algorithms, Foundations of Programming, Object-Oriented Programming, C Programming Language, Intro to Data Science</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <h2 class="section-title">Projects</h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <h3>Automated Test Suite for API Integration</h3>
-                <ul>
-                    <li>Developed a comprehensive API testing framework using pytest and unittest.mock, implementing mocking strategies to simulate dependencies and enable isolated integration testing across multiple services</li>
-                    <li>Engineered an SQLite-based logging system to track API performance metrics, generating automated statistical reports on response times, status code distributions, and reliability trends for continuous monitoring</li>
-                    <li>Created 30+ parameterized test cases covering CRUD operations, error handling, concurrent requests, and edge cases, achieving 100% test pass rate with performance benchmarking under 3-second thresholds</li>
-                </ul>
-                <div class="project-tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">pytest</span>
-                    <span class="tag">API Testing</span>
-                    <span class="tag">Integration Testing</span>
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <h3>Front of Store Attendant</h3>
+                        <p class="company">Target | Lowell, Massachusetts</p>
+                    </div>
+                    <p class="date">Dec 2021 – Aug 2024</p>
                 </div>
-                <a href="https://github.com/rmurage05/API-Test-Suite" target="_blank" class="github-link">View on GitHub →</a>
-            </div>
-
-            <div class="project-card">
-                <h3>Algorithm Performance Analyzer</h3>
                 <ul>
-                    <li>Developed a benchmarking tool to analyze and compare the efficiency of various sorting, searching, and graph algorithms</li>
-                    <li>Implements multiple algorithms, including Quicksort, Merge Sort, and Dijkstra's Algorithm, while measuring time complexity and generating detailed performance reports</li>
-                    <li>Visualizes algorithm efficiency using JavaFX for clear insights</li>
-                </ul>
-                <div class="project-tags">
-                    <span class="tag">Java</span>
-                    <span class="tag">JavaFX</span>
-                    <span class="tag">Algorithms</span>
-                    <span class="tag">Data Structures</span>
-                </div>
-                <a href="https://github.com/rmurage05/Algorithm-Performance-Analyzer" target="_blank" class="github-link">View on GitHub →</a>
-            </div>
-
-            <div class="project-card">
-                <h3>Linear Regression Analysis in R</h3>
-                <ul>
-                    <li>Conducted statistical analysis on 3,314 used vehicle records using linear regression modeling in R to identify key predictors of selling price</li>
-                    <li>Performed exploratory data analysis (EDA) with data cleaning, variable transformation, and visualization using ggplot2, dplyr, and tidyverse packages</li>
-                    <li>Evaluated model performance through 10-fold cross-validation, achieving lower RMSE with comprehensive feature selection approach</li>
-                </ul>
-                <div class="project-tags">
-                    <span class="tag">R</span>
-                    <span class="tag">Statistical Analysis</span>
-                    <span class="tag">Linear Regression</span>
-                    <span class="tag">Data Visualization</span>
-                    <span class="tag">Machine Learning</span>
-                </div>
-                <a href="https://github.com/rmurage05/Linear-Regression-Analysis" target="_blank" class="github-link">View on GitHub →</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="experience">
-        <h2 class="section-title">Experience</h2>
-        
-        <div class="experience-item">
-            <div class="experience-header">
-                <div>
-                    <h3>Front of Store Attendant</h3>
-                    <p class="company">Target | Lowell, Massachusetts</p>
-                </div>
-                <p class="date">Dec 2021 – Aug 2024</p>
-            </div>
-            <ul>
-                <li>Ensured a clean and organized store environment by retrieving carts and maintaining cashier and self-checkout lanes</li>
-                <li>Provided excellent customer service as a cashier and returns receptionist, assisting with a wide range of inquiries and transactions</li>
-                <li>Worked collaboratively with team members to optimize efficiency in tasks such as fulfilling Drive-Up orders and restocking shelves</li>
-            </ul>
-        </div>
-
-        <div class="experience-item">
-            <div class="experience-header">
-                <div>
-                    <h3>Community Service Lead</h3>
-                    <p class="company">Black Student Union | UMass Amherst</p>
-                </div>
-                <p class="date">Aug 2023 – Present</p>
-            </div>
-            <ul>
-                <li>Participated in the involvement of the curation of events, as well as meetings concerning the betterment of black student body within the campus</li>
-                <li>Played a key role in a diverse team advocating for community development and inclusion</li>
-            </ul>
-        </div>
-
-        <div class="experience-item">
-            <div class="experience-header">
-                <div>
-                    <h3>Member</h3>
-                    <p class="company">Black in Computer Science Club | UMass Amherst</p>
-                </div>
-                <p class="date">Sep 2024 – Present</p>
-            </div>
-            <ul>
-                <li>Engage in discussions and events centered on diversity, inclusion, and advancement in technology</li>
-                <li>Participate in technical workshops, networking events, and mentoring sessions focused on professional development</li>
-            </ul>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <h2 class="section-title">Skills</h2>
-        <div class="skills-container">
-            <div class="skill-category">
-                <h3>Programming Languages</h3>
-                <ul>
-                    <li>Java</li>
-                    <li>Python</li>
-                    <li>JavaScript</li>
-                    <li>TypeScript</li>
-                    <li>C</li>
-                    <li>SQL</li>
-                    <li>R</li>
+                    <li>Ensured a clean and organized store environment by retrieving carts and maintaining cashier and self-checkout lanes</li>
+                    <li>Provided excellent customer service as a cashier and returns receptionist, assisting with a wide range of inquiries and transactions</li>
+                    <li>Worked collaboratively with team members to optimize efficiency in tasks such as fulfilling Drive-Up orders and restocking shelves</li>
                 </ul>
             </div>
 
-            <div class="skill-category">
-                <h3>Tools & Technologies</h3>
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <h3>Community Service Lead</h3>
+                        <p class="company">Black Student Union | UMass Amherst</p>
+                    </div>
+                    <p class="date">Aug 2023 – Present</p>
+                </div>
                 <ul>
-                    <li>Visual Studio Code</li>
-                    <li>Excel</li>
-                    <li>PyCharm</li>
-                    <li>Jupyter Notebooks</li>
-                    <li>Git</li>
-                    <li>Linux Terminal</li>
-                    <li>RStudio</li>
+                    <li>Participated in the curation of events and meetings focused on supporting the Black student body on campus</li>
+                    <li>Played a key role in a diverse team advocating for community development and inclusion</li>
                 </ul>
             </div>
 
-            <div class="skill-category">
-                <h3>Core Competencies</h3>
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <h3>Member</h3>
+                        <p class="company">Black in Computer Science Club | UMass Amherst</p>
+                    </div>
+                    <p class="date">Sep 2024 – Present</p>
+                </div>
                 <ul>
-                    <li>Data Analysis</li>
-                    <li>Algorithm Design</li>
-                    <li>API Testing</li>
-                    <li>Problem Solving</li>
-                    <li>Team Collaboration</li>
-                    <li>Software Development</li>
+                    <li>Engage in discussions and events centered on diversity, inclusion, and advancement in technology</li>
+                    <li>Participate in technical workshops, networking events, and mentoring sessions focused on professional development</li>
                 </ul>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <h2 class="section-title">Get In Touch</h2>
-        <div class="contact-content">
-            <p>
-                I'm currently seeking internship opportunities in data analysis and software development. 
-                Let's connect and explore how I can contribute to your team!
+        <!-- Skills Section -->
+        <section id="skills" class="skills">
+            <h2 class="section-title">Skills</h2>
+            <p class="section-intro">
+                A toolkit that supports both analysis and implementation—from exploring data to testing and shipping code.
             </p>
-            <a href="mailto:ryank.murage@gmail.com" class="cta-button">Send me an email</a>
-            
-            <div class="social-links">
-                <a href="https://github.com/rmurage05" target="_blank">
-                    <span>📁</span> GitHub
-                </a>
-                <a href="https://www.linkedin.com/in/ryan-murage" target="_blank">
-                    <span>💼</span> LinkedIn
-                </a>
-                <a href="tel:781-309-8951">
-                    <span>📱</span> (781) 309-8951
-                </a>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <ul>
+                        <li>Java</li>
+                        <li>Python</li>
+                        <li>JavaScript</li>
+                        <li>TypeScript</li>
+                        <li>C</li>
+                        <li>SQL</li>
+                        <li>R</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Tools & Technologies</h3>
+                    <ul>
+                        <li>Visual Studio Code</li>
+                        <li>Excel</li>
+                        <li>PyCharm</li>
+                        <li>Jupyter Notebooks</li>
+                        <li>Git</li>
+                        <li>Linux Terminal</li>
+                        <li>RStudio</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Core Competencies</h3>
+                    <ul>
+                        <li>Data Analysis</li>
+                        <li>Algorithm Design</li>
+                        <li>API Testing</li>
+                        <li>Problem Solving</li>
+                        <li>Team Collaboration</li>
+                        <li>Software Development</li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <p>
+                    I'm currently seeking internship opportunities in data analysis and software development. 
+                    Let's connect and explore how I can contribute to your team.
+                </p>
+                <a href="mailto:ryank.murage@gmail.com" class="cta-button">Send me an email</a>
+                
+                <div class="social-links">
+                    <a href="https://github.com/rmurage05" target="_blank">
+                        <span>📁</span> GitHub
+                    </a>
+                    <a href="https://www.linkedin.com/in/ryan-murage" target="_blank">
+                        <span>💼</span> LinkedIn
+                    </a>
+                    <a href="tel:781-309-8951">
+                        <span>📱</span> (781) 309-8951
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Ryan K. Murage. Built with passion for technology and innovation.</p>
+        <p>&copy; 2025 Ryan K. Murage. Built with curiosity, data, and code.</p>
     </footer>
 
     <script>
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (!href || href === '#') return;
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const target = document.querySelector(href);
                 if (target) {
                     target.scrollIntoView({
                         behavior: 'smooth',
@@ -703,10 +1124,11 @@
                 }
             });
 
-            document.querySelectorAll('nav a').forEach(link => {
-                link.style.color = '#333';
-                if (link.getAttribute('href').slice(1) === current) {
-                    link.style.color = '#6366f1';
+            document.querySelectorAll('nav a[href^="#"]').forEach(link => {
+                link.style.color = 'var(--gray-100)';
+                const id = link.getAttribute('href').slice(1);
+                if (id === current) {
+                    link.style.color = 'var(--accent-soft)';
                 }
             });
         });
